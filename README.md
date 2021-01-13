@@ -1,0 +1,1 @@
+# shoppingfeed-for-woocommerce-helpers
