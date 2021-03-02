@@ -21,10 +21,14 @@ class ShoppingFeedAdvancedHelper {
 			return array();
 		}
 
-		return array(
-			'date'         => \ActionScheduler::store()->get_date( $last_action_id )->format( 'Y-m-d H:i:s' ),
-			'status'       => \ActionScheduler::store()->get_status( $last_action_id ),
-		);
+		try {
+			return array(
+				'date'   => \ActionScheduler::store()->get_date( $last_action_id )->format( 'Y-m-d H:i:s' ),
+				'status' => \ActionScheduler::store()->get_status( $last_action_id ),
+			);
+		} catch ( \Exception $exception ) {
+			return array();
+		}
 	}
 
 	public static function get_sfa_settings( $param ) {
