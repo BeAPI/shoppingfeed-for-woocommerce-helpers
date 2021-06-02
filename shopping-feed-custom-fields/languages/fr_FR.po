@@ -1,0 +1,52 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ShoppingFeed Custom Fields\n"
+"POT-Creation-Date: 2021-03-22 14:23+0100\n"
+"PO-Revision-Date: 2021-03-22 14:24+0100\n"
+"Last-Translator: \n"
+"Language-Team: Be API\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"X-Poedit-Basepath: ../src\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: esc_html_e;esc;__;esc_attr_e;esc_html\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Admin/Options.php:37 Admin/Options.php:38
+msgid "ShoppingFeed Custom Fields"
+msgstr ""
+
+#: Admin/Options.php:75
+msgid "Champs ACF"
+msgstr ""
+
+#: Admin/Options.php:86
+msgid "Champs personnalisés"
+msgstr ""
+
+#: Admin/Options.php:103
+msgid "Custom fields to export to Shoppingfeed. Default : all"
+msgstr ""
+
+#: Admin/Options.php:119
+msgid "Save changes"
+msgstr "Enregistrer"
+
+#: Admin/Options.php:147
+msgid "Selected ACF Fields"
+msgstr "Champs ACF sélectionnés"
+
+#: Admin/Options.php:148
+msgid "Unselected ACF Fields"
+msgstr "Champs ACF non sélectionnés"
+
+#: Admin/Options.php:149
+msgid "Search"
+msgstr "Rechercher"
+
+#: ShoppingFeedCustomFields.php:38
+msgid "ShoppingFeed plugin must be activated"
+msgstr "Le plugin ShoppingFeed doit être activé"
