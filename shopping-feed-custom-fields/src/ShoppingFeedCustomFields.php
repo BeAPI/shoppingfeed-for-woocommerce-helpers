@@ -34,9 +34,9 @@ class ShoppingFeedCustomFields {
 				'admin_notices',
 				function () {
 					?>
-                    <div id="message" class="notice notice-error">
-                        <p><?php esc_html_e( 'ShoppingFeed plugin must be activated', 'shopping-feed-advanced' ); ?></p>
-                    </div>
+					<div id="message" class="notice notice-error">
+						<p><?php esc_html_e( 'ShoppingFeed and ACF plugins must be activated', 'shopping-feed-custom-fields' ); ?></p>
+					</div>
 					<?php
 				}
 			);
@@ -53,13 +53,14 @@ class ShoppingFeedCustomFields {
 
 	/**
 	 * Check if the plugin is compatible
+     * @return bool
 	 */
 	public function check_compatibility() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		return is_plugin_active( 'shopping-feed/shoppingfeed.php' );
+		return is_plugin_active( 'shopping-feed/shoppingfeed.php' ) && is_plugin_active( 'advanced-custom-fields/acf.php' );
 	}
 
 	/**

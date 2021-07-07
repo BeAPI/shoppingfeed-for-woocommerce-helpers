@@ -7,7 +7,7 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
-        <file name="shoppingfeed.php"/>
+        <file name="shoppingfeed-custom-fields.php"/>
         <directory name="src" />
         <ignoreFiles>
             <directory name="vendor" />
