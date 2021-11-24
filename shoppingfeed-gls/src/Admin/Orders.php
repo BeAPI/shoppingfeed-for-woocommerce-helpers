@@ -24,6 +24,7 @@ class Orders {
      * @return void
      */
     public function write_order_to_gls_table( $order_id, $status_from, $status_to, $order ) : void {
+        // TODO: would be nice to add apply_filters on $order and $status_to
         // Only target status changes to processing
         if ( "processing" !== $status_to ) {
             return;
@@ -42,7 +43,7 @@ class Orders {
         $database = new Database();
 
         // Make sure GLS table is set and writeable
-        if ( ! SF_GLS_TABLE_NAME || ! $database->check_gls_table_exists( SF_GLS_TABLE_NAME ) ) {
+        if ( ! defined( 'SF_GLS_TABLE_NAME' ) || ! $database->check_gls_table_exists( SF_GLS_TABLE_NAME ) ) {
             return;
         }
 
