@@ -52,25 +52,24 @@ class Database {
 	 * @return array
 	 */
 	private function map_order_fields_for_gls_table( WC_Order $order ): array {
-		// TODO: find these fields with test values
 		return array(
 			'fields' => array(
-				'session_id'              => 'test_session_id', // 255 max characters string, non-nullable
+				'session_id'              => '', // 255 max characters string, non-nullable
 				'customer_id'             => $order->get_customer_id(), // 255 max characters string, non-nullable
 				'order_id'                => $order->get_id(), // 11 number int
-				'shipping_method_id'      => 'test_shipping_method_id', // 255 max characters string, non-nullable
-				'gls_product'             => 'test_gls_product', // 255 max characters string, non-nullable
-				'parcel_shop_id'          => 'test_parcel_shop_id', // 255 max characters string, nullable
+				'shipping_method_id'      => Orders::get_sf_order_shipping_method_id( $order ), // 255 max characters string, non-nullable
+				'gls_product'             => GLS::get_gls_product( $order ), // 255 max characters string, non-nullable
+				'parcel_shop_id'          => null, // 255 max characters string, nullable
 				'name'                    => $order->get_formatted_shipping_full_name(), // 255 max characters string, nullable
 				'address1'                => $order->get_shipping_address_1(), // 255 max characters string, nullable
 				'address2'                => $order->get_shipping_address_2(), // 255 max characters string, nullable
 				'postcode'                => $order->get_shipping_postcode(), // 255 max characters string, nullable
 				'city'                    => $order->get_shipping_city(), // 255 max characters string, nullable
 				'phone'                   => $order->get_billing_phone(), // 255 max characters string, nullable
-				'phone_mobile'            => 'test_phone_mobile', // 255 max characters string, nullable
-				'customer_phone_mobile'   => 'test_customer_phone_mobile', // 255 max characters string, nullable
+				'phone_mobile'            => null, // 255 max characters string, nullable
+				'customer_phone_mobile'   => '', // 255 max characters string, non-nullable
 				'country'                 => $order->get_shipping_country(), // 3 max characters string, nullable
-				'parcel_shop_working_day' => 'test_parcel_shop_working_day', // text (65535 max), nullable
+				'parcel_shop_working_day' => null, // text (65535 max), nullable
 			),
 			'formats' => array(
 				'%s',
@@ -92,4 +91,5 @@ class Database {
 			),
 		);
 	}
+
 }

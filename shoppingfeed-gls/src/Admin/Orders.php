@@ -3,6 +3,7 @@
 namespace ShoppingFeed\ShoppingFeedWCGLS\Admin;
 
 use ShoppingFeed\ShoppingFeedWC\Orders\Order;
+use WC_Order;
 
 // Exit on direct access
 defined( 'ABSPATH' ) || exit;
@@ -31,9 +32,10 @@ class Orders {
 		}
 
 		// Make sure we are treating only Shopping Feed orders
+		/**
 		if ( ! Order::is_sf_order( $order ) ) {
 			return;
-		}
+		}*/
 
 		// Make sure $order_id is valid
 		if ( ! $order_id || ! $order ) {
@@ -51,4 +53,19 @@ class Orders {
 		$database->insert_order_in_gls_table( $order );
 	}
 
+	/**
+	 * Returns SF shipping method's ID
+	 *
+	 * @param WC_Order $order
+	 * @return string
+	 */
+	public static function get_sf_order_shipping_method_id( WC_Order $order ): string {
+		$shipping_method = json_decode( $order->get_meta( 'sf_shipping' ), true );
+
+		if ( ! $shipping_method || $shipping_method['method_id'] ) {
+			return '';
+		}
+
+		return $shipping_method['method_id'];
+	}
 }

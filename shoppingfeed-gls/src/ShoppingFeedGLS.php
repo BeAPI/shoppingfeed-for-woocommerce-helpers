@@ -5,6 +5,7 @@ namespace ShoppingFeed\ShoppingFeedWCGLS;
 // Exit on direct access
 use ShoppingFeed\ShoppingFeedWCGLS\Admin\Database;
 use ShoppingFeed\ShoppingFeedWCGLS\Admin\Orders;
+use ShoppingFeed\ShoppingFeedWCGLS\Admin\GLS;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,6 +22,9 @@ class ShoppingFeedGLS {
 
 	/** @var Database $database */
 	private $database;
+
+	/** @var GLS $gls */
+	private $gls;
 
 	/**
 	 * ShoppingFeed constructor.
@@ -44,6 +48,7 @@ class ShoppingFeedGLS {
 
 		$this->orders   = new Orders();
 		$this->database = new Database();
+		$this->gls      = new GLS();
 
 		//Add settings link
 		add_filter( 'plugin_action_links_' . SF_GLS_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
