@@ -32,10 +32,9 @@ class Orders {
 		}
 
 		// Make sure we are treating only Shopping Feed orders
-		/**
 		if ( ! Order::is_sf_order( $order ) ) {
 			return;
-		}*/
+		}
 
 		// Make sure $order_id is valid
 		if ( ! $order_id || ! $order ) {
@@ -62,7 +61,7 @@ class Orders {
 	public static function get_sf_order_shipping_method_id( WC_Order $order ): string {
 		$shipping_method = json_decode( $order->get_meta( 'sf_shipping' ), true );
 
-		if ( ! $shipping_method || $shipping_method['method_id'] ) {
+		if ( ! $shipping_method || ! $shipping_method['method_id'] ) {
 			return '';
 		}
 
