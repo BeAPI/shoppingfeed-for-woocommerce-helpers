@@ -12,11 +12,11 @@ defined( 'ABSPATH' ) || exit;
  * @package ShoppingFeed
  */
 class ShoppingFeedGLSHelper {
-    /**
-     * Return the settings link for plugin
-     * @return string
-     */
-    public static function get_setting_link() {
-        return admin_url( 'admin.php?page=shopping-feed-advanced' );
-    }
+	/**
+	 * Return the settings link for plugin
+	 * @return string
+	 */
+	public static function get_setting_link(): string {
+		return admin_url( 'admin.php?page=shopping-feed-advanced' );
+	}
 }
