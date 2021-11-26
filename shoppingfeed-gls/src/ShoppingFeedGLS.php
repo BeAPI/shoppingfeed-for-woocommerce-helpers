@@ -32,16 +32,7 @@ class ShoppingFeedGLS {
 	private function __construct() {
 		//Check Compatibility
 		if ( ! $this->check_compatibility() ) {
-			add_action(
-				'admin_notices',
-				function () {
-					?>
-					<div id="message" class="notice notice-error">
-						<p><?php esc_html_e( 'ShoppingFeed and GLS plugins for WooCommerce must be activated', 'shopping-feed-gls' ); ?></p>
-					</div>
-					<?php
-				}
-			);
+			add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
 
 			return;
 		}
@@ -52,6 +43,14 @@ class ShoppingFeedGLS {
 
 		//Add settings link
 		add_filter( 'plugin_action_links_' . SF_GLS_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
+	}
+
+	public function display_admin_notice() {
+		?>
+		<div id="message" class="notice notice-error">
+			<p><?php esc_html_e( 'ShoppingFeed and GLS plugins for WooCommerce must be activated', 'shopping-feed-gls' ); ?></p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -93,11 +92,15 @@ class ShoppingFeedGLS {
 	 * @return array
 	 */
 	public function plugin_action_links( array $links = array() ): array {
-		$plugin_links = array(
-			'<a href="' . esc_url( ShoppingFeedGLSHelper::get_setting_link() ) . '">' . esc_html__( 'Settings', 'shopping-feed-advanced' ) . '</a>',
+		$links[] = array(
+			sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( ShoppingFeedGLSHelper::get_setting_link() ),
+				esc_html__( 'Settings', 'shopping-feed-gls' )
+			),
 		);
 
-		return array_merge( $plugin_links, $links );
+		return $links;
 	}
 
 	/**
