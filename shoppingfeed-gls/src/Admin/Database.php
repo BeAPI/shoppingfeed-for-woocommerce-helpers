@@ -41,6 +41,10 @@ class Database {
 
 		$data = $this->map_order_fields_for_gls_table( $order );
 
+		if ( ! $data['fields'] || $data['formats'] ) {
+			return;
+		}
+
 		$wpdb->insert( SF_GLS_TABLE_NAME, $data['fields'], $data['formats'] );
 	}
 

@@ -31,13 +31,13 @@ class Orders {
 			return;
 		}
 
-		// Make sure we are treating only Shopping Feed orders
-		if ( ! Order::is_sf_order( $order ) ) {
+		// Make sure $order_id is valid
+		if ( ! $order_id ) {
 			return;
 		}
 
-		// Make sure $order_id is valid
-		if ( ! $order_id || ! $order ) {
+		// Make sure we are treating only Shopping Feed orders
+		if ( ! Order::is_sf_order( $order ) ) {
 			return;
 		}
 
