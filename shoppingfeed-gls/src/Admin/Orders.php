@@ -49,7 +49,7 @@ class Orders {
 		}
 
 		// Everything is ok now, write to the database
-		$database->insert_order_in_gls_table( $order );
+		$database->write_order_in_gls_table( $order );
 	}
 
 	/**

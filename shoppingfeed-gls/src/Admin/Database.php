@@ -36,16 +36,27 @@ class Database {
 	 *
 	 * @return void
 	 */
-	public function insert_order_in_gls_table( WC_Order $order ): void {
-		global $wpdb;
-
-		$data = $this->map_order_fields_for_gls_table( $order );
-
-		if ( ! $data['fields'] || $data['formats'] ) {
+	public function write_order_in_gls_table( WC_Order $order ): void {
+		// Make sure we get an order ID
+		if ( ! $order->get_id() ) {
 			return;
 		}
 
-		$wpdb->insert( SF_GLS_TABLE_NAME, $data['fields'], $data['formats'] );
+		// Create fields and formats mapping from WC_Order to GLS table
+		$data = $this->map_order_fields_for_gls_table( $order );
+
+		// Make sure fields and formats data are correct
+		if ( ! $data['fields'] || ! $data['formats'] ) {
+			return;
+		}
+
+		// Either update or insert into the GLS table
+		$this->insert_or_update_in_gls_table(
+			SF_GLS_TABLE_NAME, // table name
+			$order,
+			$data['fields'], // fields
+			$data['formats'] // formats
+		);
 	}
 
 	/**
@@ -96,4 +107,27 @@ class Database {
 		);
 	}
 
+	/**
+	 * Checks if we want to perform an update or insert operation, and returns the operation status code
+	 *
+	 * @param string $table_name
+	 * @param WC_Order $order
+	 * @param array $fields
+	 * @param array $formats
+	 *
+	 * @return void
+	 */
+	private function insert_or_update_in_gls_table( string $table_name, WC_Order $order, array $fields, array $formats ): void {
+		global $wpdb;
+
+		$sql = $wpdb->prepare( "SELECT order_id FROM `$table_name` WHERE order_id = %d;", $order->get_id() );
+		$order_exists = $wpdb->get_results( $sql ); // WPCS: unprepared SQL OK
+
+		// If it doesn't exist, insert it
+		if ( empty( $order_exists ) ) {
+			$wpdb->insert( $table_name, $fields, $formats );
+		} else { // if it exists update it
+			$wpdb->update( $table_name, $fields, array( 'order_id' => $order->get_id() ), $formats, '%d' );
+		}
+	}
 }

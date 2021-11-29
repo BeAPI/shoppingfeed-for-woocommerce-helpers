@@ -30,7 +30,6 @@ global $wpdb;
 define( 'SF_GLS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SF_GLS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'SF_GLS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-// TODO: could/should go in Database class?
 define( 'SF_GLS_TABLE_NAME', $wpdb->prefix . 'woocommerce_gls_cart_carrier' );
 
 /**
