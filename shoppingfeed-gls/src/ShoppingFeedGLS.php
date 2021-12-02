@@ -63,7 +63,7 @@ class ShoppingFeedGLS {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
-		if ( is_plugin_active( 'shoppingfeed-for-woocommerce/shoppingfeed.php' )
+		if ( ( is_plugin_active( 'shoppingfeed-for-woocommerce/shoppingfeed.php' ) || is_plugin_active( 'shopping-feed/shoppingfeed.php' ) )
 			&& is_plugin_active( 'woocommerce-gls/woocommerce-gls.php' ) ) {
 			return true;
 		}
