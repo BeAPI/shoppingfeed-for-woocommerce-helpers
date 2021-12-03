@@ -176,7 +176,7 @@ class Fields {
 			}
 
 			$key                    = $field['id'] . '_' . $index;
-			$field['value']         = get_post_meta( $variation->ID, $field['id'], true );
+			$field['value']         = get_post_meta( $variation->ID, $key, true );
 			$field['id']            = $key;
 			$field['class']         = 'short';
 			$field['wrapper_class'] = 'form-row form-row-full form-field';
@@ -198,7 +198,7 @@ class Fields {
 			$key             = $field['id'] . '_' . $index;
 			$field_post_data = $_POST[ $key ]; //phpcs:ignore
 			if ( ! empty( $field_post_data ) ) {
-				$wc_product->update_meta_data( $field['id'], wc_clean( wp_unslash( $field_post_data ) ) );
+				$wc_product->update_meta_data( $key, wc_clean( wp_unslash( $field_post_data ) ) );
 				$wc_product->save_meta_data();
 			}
 		}
