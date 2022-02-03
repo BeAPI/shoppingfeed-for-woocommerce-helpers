@@ -20,8 +20,8 @@ class Orders {
 		add_filter( 'manage_edit-shop_order_columns', [ $this, 'custom_shop_order_column' ] );
 		add_action( 'manage_shop_order_posts_custom_column', [ $this, 'custom_orders_list_column_content' ], 10, 2 );
 
-		$this->channel_name_meta = Query::$wc_meta_sf_channel_name;
-		$this->sf_reference_meta = Query::$wc_meta_sf_reference;
+		$this->channel_name_meta = Query::WC_META_SF_CHANNEL_NAME;
+		$this->sf_reference_meta = Query::WC_META_SF_REFERENCE;
 	}
 
 	public function custom_shop_order_column( $columns ) {
