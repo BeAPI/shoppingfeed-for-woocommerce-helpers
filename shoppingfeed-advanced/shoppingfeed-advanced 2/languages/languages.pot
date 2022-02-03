@@ -1,0 +1,35 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-04-20T12:04:03+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: languages\n"
+
+
+#. Plugin Name of the plugin
+msgid "ShoppingFeed Advanced"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/shoppingfeed/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Connection Controller Plugin for ShoppingFeed - Sell on Amazon, Ebay, Google, and 1000's of international marketplaces"
+msgstr ""
+
+#. Author of the plugin
+msgid "Shopping-Feed"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.shopping-feed.com/"
+msgstr ""
+
