@@ -20,7 +20,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "ShoppingFeed\\ShoppingFeedWCCdiscountFees\\": "src"
+      "ShoppingFeed\\ShoppingFeedWCCdiscountFees\\": "src",
+      "ShoppingFeed\\ShoppingFeedWCCdiscountFees\\Admin\\": "src/Admin"
     }
   },
   "require": {

@@ -2,9 +2,13 @@
 
 namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
 
+use ShoppingFeed\ShoppingFeedWC\Addons\Marketplace;
+use ShoppingFeed\ShoppingFeedWC\Addons\Shipping\Marketplaces\Cdiscount;
 use ShoppingFeed\ShoppingFeedWC\Orders\Order as SFDefaultOrder;
 
 class Order {
+
+    use Marketplace;
 
     /**
      * @var $sf_cdiscount_fee_meta_key
@@ -29,7 +33,13 @@ class Order {
      * @return void
      */
     private function set_cdiscount_fees_as_sf_meta( $wc_fees, $wc_order, $cdiscount_fees ) {
+        // Make sure order is from Shopping Feed
         if  ( ! SFDefaultOrder::is_sf_order( $wc_order ) ) {
+            return;
+        }
+
+        // Make sure SF order is from Cdiscount
+        if ( ! $this->is_cdiscount( $wc_order ) ) {
             return;
         }
 
