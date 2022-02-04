@@ -5,7 +5,7 @@ namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
 class Totals {
 
     /** @var $cdiscount_fee_item_line_name */
-    private $cdiscount_fee_item_line_name;
+    private $cdiscount_fee_item_line_name = 'Facilités de paiement Cdiscount';
 
     public function __construct() {
         add_action( 'woocommerce_checkout_create_order', [ $this, 'add_cdiscount_fees_meta_to_total' ], 20, 1 );
@@ -42,7 +42,7 @@ class Totals {
     }
 
     /**
-     * Display the Cdiscount meta in WC Order as a new line
+     * Add Cdiscount fee value as WC item line
      *
      * @return void
      */
