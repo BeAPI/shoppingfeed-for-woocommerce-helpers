@@ -10,7 +10,7 @@
  * Version:          1.0
  * Requires at least WP: 5.2
  * Requires at least WooCommerce: 3.8 (3.9/4.0)
- * Requires PHP:     7.4
+ * Requires PHP:     5.6
  * License:          GPLv3 or later
  * License URI:      https://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -37,7 +37,7 @@ define( 'SF_CDISCOUNT_FEES_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 function init() {
     load_plugin_textdomain( 'shopping-feed-cdiscount-fees', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 
-    ShoppingFeedWCCdiscountFees::get_instance();
+    ShoppingFeedCdiscountFees::get_instance();
 }
 
 \add_action( 'plugins_loaded', __NAMESPACE__ . '\\init' );

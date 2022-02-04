@@ -12,9 +12,9 @@ use ShoppingFeed\ShoppingFeedWCCdiscountFees\ShoppingFeedCdiscountFeesHelper;
 /**
  * Class ShoppingFeed to init plugin
  */
-class ShoppingFeedWCCdiscountFees {
+class ShoppingFeedCdiscountFees {
 
-    /** @var ShoppingFeedWCCdiscountFees */
+    /** @var ShoppingFeedCdiscountFees */
     private static $instance;
 
     /** @var Order $order */

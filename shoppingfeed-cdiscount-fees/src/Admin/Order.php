@@ -1,6 +1,6 @@
 <?php
 
-namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
+namespace ShoppingFeed\ShoppingFeedWCCdiscountFees\Admin;
 
 use ShoppingFeed\ShoppingFeedWC\Addons\Marketplace;
 use ShoppingFeed\ShoppingFeedWC\Addons\Shipping\Marketplaces\Cdiscount;

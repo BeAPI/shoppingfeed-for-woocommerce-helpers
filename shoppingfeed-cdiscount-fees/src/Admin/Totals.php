@@ -1,6 +1,6 @@
 <?php
 
-namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
+namespace ShoppingFeed\ShoppingFeedWCCdiscountFees\Admin;
 
 class Totals {
 
@@ -52,7 +52,7 @@ class Totals {
         }
 
         $item_array = [
-            'order_item_name' => __( $this->cdiscount_fee_item_line_name, 'shopping-feed-cdiscount-fees' ),
+            'order_item_name' => __( $this->cdiscount_fee_item_line_name . ' : ' . $cdiscount_fees, 'shopping-feed-cdiscount-fees' ),
             'order_item_type' => 'line_item',
         ];
 
