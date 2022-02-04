@@ -4,6 +4,9 @@ namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
 
 class Totals {
 
+    /** @var $cdiscount_fee_item_line_name */
+    private $cdiscount_fee_item_line_name;
+
     public function __construct() {
         add_action( 'woocommerce_checkout_create_order', [ $this, 'add_cdiscount_fees_meta_to_total' ], 20, 1 );
     }
@@ -16,12 +19,15 @@ class Totals {
      */
     private function add_cdiscount_fees_meta_to_total( $order ) {
         $total = $order->get_total();
+        $cdiscount_fees = (float) $this->get_cdiscount_fees_amount();
 
-        if ( ! $this->get_cdiscount_fees_amount() ) {
+        if ( ! $cdiscount_fees ) {
             return $total;
         }
 
-        return $total + $this->get_cdiscount_fees_amount();
+        $this->add_cdiscount_fees_order_item( $order, $cdiscount_fees );
+
+        return $total + $cdiscount_fees;
     }
 
     /**
@@ -40,8 +46,17 @@ class Totals {
      *
      * @return void
      */
-    private function display_cdiscount_fees_line_in_order() {
-        // TODO: display a new line for Cdiscount meta fees in WC order in back-office
+    private function add_cdiscount_fees_order_item( $order, $cdiscount_fees ) {
+        if ( ! $order instanceof WC_Order || ! $cdiscount_fees ) {
+            return;
+        }
+
+        $item_array = [
+            'order_item_name' => __( $this->cdiscount_fee_item_line_name, 'shopping-feed-cdiscount-fees' ),
+            'order_item_type' => 'line_item',
+        ];
+
+        wc_add_order_item( $order->get_id(),  $item_array );
     }
 
 }

@@ -8,6 +8,6 @@ class ShoppingFeedCdiscountFeesHelper {
      * @return string
      */
     public static function get_setting_link() {
-        return admin_url( 'admin.php?page=shopping-feed-advanced' );
+        return admin_url( 'admin.php?page=shopping-feed' );
     }
 }
