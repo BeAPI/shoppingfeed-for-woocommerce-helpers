@@ -5,8 +5,8 @@ namespace ShoppingFeed\ShoppingFeedWCCdiscountFees;
 // Exit on direct access
 defined( 'ABSPATH' ) || exit;
 
-use ShoppingFeed\ShoppingFeedWCCdiscountFees\Order;
-use ShoppingFeed\ShoppingFeedWCCdiscountFees\Totals;
+use ShoppingFeed\ShoppingFeedWCCdiscountFees\Admin\Order;
+use ShoppingFeed\ShoppingFeedWCCdiscountFees\Admin\Totals;
 use ShoppingFeed\ShoppingFeedWCCdiscountFees\ShoppingFeedCdiscountFeesHelper;
 
 /**
@@ -36,9 +36,6 @@ class ShoppingFeedCdiscountFees {
 
         $this->order  = new Order();
         $this->totals = new Totals();
-
-        //Add settings link
-        add_filter( 'plugin_action_links_' . SF_CDISCOUNT_FEES_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
     }
 
     public function display_admin_notice() {
@@ -77,24 +74,6 @@ class ShoppingFeedCdiscountFees {
         }
 
         return self::$instance;
-    }
-
-    /**
-     * Add additional action links.
-     *
-     * @param array $links
-     * @return array
-     */
-    public function plugin_action_links( array $links = array() ) {
-        $links[] = array(
-            sprintf(
-                '<a href="%s">%s</a>',
-                esc_url( ShoppingFeedCdiscountFeesHelper::get_setting_link() ),
-                esc_html__( 'Settings', 'shopping-feed-cdiscount-fees' )
-            ),
-        );
-
-        return $links;
     }
 
     /**
