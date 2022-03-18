@@ -22,35 +22,51 @@ class Order {
 
     public function __construct() {
         add_action( 'sf_after_order_add_fee_item', [ $this, 'set_cdiscount_fees_as_sf_meta' ], 10, 3 );
+		add_filter( 'sf_pre_add_fees', [ $this, 'is_cdiscount_sf_order' ], 10, 2 );
     }
 
     /**
-     * Remove default WC Fee, add it as order meta instead
+     * Add Cdiscount fees as meta
      *
-     * @param WC_Order_Item_Fee $wc_fees
+     * @param WC_Order_Item_Fee $fees
      * @param WC_Order $wc_order
-     * @param $cdiscount_fees
+     * @param $sf_order
+     *
      * @return void
      */
-    private function set_cdiscount_fees_as_sf_meta( $wc_fees, $wc_order, $cdiscount_fees ) {
-        // Make sure order is from Shopping Feed
-        if  ( ! SFDefaultOrder::is_sf_order( $wc_order ) ) {
-            return;
+    private function set_cdiscount_fees_as_sf_meta( $fees, $wc_order, $sf_order ) {
+		// If not a Shopping Feed order from Cdiscout, do nothing
+        if ( ! $this->is_cdiscount_sf_order( $wc_order, $sf_order ) ) {
+			return;
         }
-
-        // Make sure SF order is from Cdiscount
-        if ( ! $this->is_cdiscount( $wc_order ) ) {
-            return;
-        }
-
-        // Delete standard WC Fees
-        $wc_order->remove_item( $wc_fees->get_id() );
 
         // Define Cdiscount fees as meta
-        $wc_order->add_meta_data( $this->sf_discount_fee_meta_key, wp_json_encode( $cdiscount_fees ) );
+        $wc_order->add_meta_data( $this->sf_discount_fee_meta_key, wp_json_encode( $fees ) );
 
-        $this->sf_cdiscount_fee_meta_value = $cdiscount_fees;
+        $this->sf_cdiscount_fee_meta_value = $fees;
     }
+
+	/**
+	 * Check if it is a Shopping Feed order from Cdiscount
+	 *
+	 * @param $wc_order
+	 * @param $sf_order
+	 *
+	 * @return bool
+	 */
+	private function is_cdiscount_sf_order( $wc_order, $sf_order  ) {
+		// Make sure order comes from Shopping Feed
+		if  ( ! $sf_order->is_sf_order( $wc_order ) ) {
+			return false;
+		}
+
+		// Make sure SF order is from Cdiscount
+		if ( ! $this->is_cdiscount( $sf_order ) ) {
+			return false;
+		}
+
+		return true;
+	}
 
     /**
      * @return mixed
