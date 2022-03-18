@@ -21,40 +21,28 @@ class Order {
     public $sf_cdiscount_fee_meta_value;
 
     public function __construct() {
-        add_action( 'sf_after_order_add_fee_item', [ $this, 'set_cdiscount_fees_as_sf_meta' ], 10, 3 );
-		add_filter( 'sf_pre_add_fees', [ $this, 'is_cdiscount_sf_order' ], 10, 2 );
+		add_filter( 'sf_pre_add_fees', [ $this, 'save_cdiscount_fees_as_meta' ], 10, 2 );
     }
 
     /**
-     * Add Cdiscount fees as meta
+     * Get the order fees meta value
      *
-     * @param WC_Order_Item_Fee $fees
-     * @param WC_Order $wc_order
-     * @param $sf_order
-     *
-     * @return void
+     * @return mixed
      */
-    private function set_cdiscount_fees_as_sf_meta( $fees, $wc_order, $sf_order ) {
-		// If not a Shopping Feed order from Cdiscout, do nothing
-        if ( ! $this->is_cdiscount_sf_order( $wc_order, $sf_order ) ) {
-			return;
-        }
-
-        // Define Cdiscount fees as meta
-        $wc_order->add_meta_data( $this->sf_discount_fee_meta_key, wp_json_encode( $fees ) );
-
-        $this->sf_cdiscount_fee_meta_value = $fees;
+    public function get_cdiscount_fee_meta_value() {
+        return $this->sf_cdiscount_fee_meta_value;
     }
 
 	/**
-	 * Check if it is a Shopping Feed order from Cdiscount
+	 * Save the Cdiscount fees as WC order meta data
 	 *
 	 * @param $wc_order
 	 * @param $sf_order
+	 * @param $fees
 	 *
 	 * @return bool
 	 */
-	private function is_cdiscount_sf_order( $wc_order, $sf_order  ) {
+	private function save_cdiscount_fees_as_meta( $wc_order, $sf_order, $fees ) {
 		// Make sure order comes from Shopping Feed
 		if  ( ! $sf_order->is_sf_order( $wc_order ) ) {
 			return false;
@@ -65,13 +53,11 @@ class Order {
 			return false;
 		}
 
+		// Define Cdiscount fees as meta
+		$wc_order->add_meta_data( $this->sf_discount_fee_meta_key, wp_json_encode( $fees ) );
+
+		$this->sf_cdiscount_fee_meta_value = $fees;
+
 		return true;
 	}
-
-    /**
-     * @return mixed
-     */
-    public function get_cdiscount_fee_meta_value() {
-        return $this->sf_cdiscount_fee_meta_value;
-    }
 }
