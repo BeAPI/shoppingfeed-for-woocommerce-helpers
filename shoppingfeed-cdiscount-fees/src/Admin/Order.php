@@ -21,7 +21,7 @@ class Order {
     public $sf_cdiscount_fee_meta_value;
 
     public function __construct() {
-		add_filter( 'sf_pre_add_fees', [ $this, 'save_cdiscount_fees_as_meta' ], 10, 3 );
+		add_filter( 'sf_pre_add_fees', [ $this, 'save_cdiscount_fees_as_meta' ], 10, 4 );
     }
 
 	/**
