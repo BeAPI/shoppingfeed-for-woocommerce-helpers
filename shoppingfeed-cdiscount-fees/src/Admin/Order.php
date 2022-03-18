@@ -4,7 +4,7 @@ namespace ShoppingFeed\ShoppingFeedWCCdiscountFees\Admin;
 
 use ShoppingFeed\ShoppingFeedWC\Addons\Marketplace;
 use ShoppingFeed\ShoppingFeedWC\Addons\Shipping\Marketplaces\Cdiscount;
-use ShoppingFeed\ShoppingFeedWC\Orders\Order as SFDefaultOrder;
+use ShoppingFeed\ShoppingFeedWC\Orders\Order as SF_Order;
 
 class Order {
 
@@ -21,7 +21,7 @@ class Order {
     public $sf_cdiscount_fee_meta_value;
 
     public function __construct() {
-		add_filter( 'sf_pre_add_fees', [ $this, 'save_cdiscount_fees_as_meta' ], 10, 2 );
+		add_filter( 'sf_pre_add_fees', [ $this, 'save_cdiscount_fees_as_meta' ], 10, 3 );
     }
 
     /**
@@ -36,15 +36,15 @@ class Order {
 	/**
 	 * Save the Cdiscount fees as WC order meta data
 	 *
-	 * @param $wc_order
-	 * @param $sf_order
-	 * @param $fees
+	 * @param $wc_order // A WC_Order object or ID
+	 * @param $sf_order // a OrderResource object
+	 * @param $fees // Cdiscount Fees
 	 *
 	 * @return bool
 	 */
 	private function save_cdiscount_fees_as_meta( $wc_order, $sf_order, $fees ) {
 		// Make sure order comes from Shopping Feed
-		if  ( ! $sf_order->is_sf_order( $wc_order ) ) {
+		if  ( ! $sf_order::is_sf_order( $wc_order ) ) {
 			return false;
 		}
 
