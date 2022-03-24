@@ -69,34 +69,4 @@ class Totals {
 		</tr>
 		<?php
 	}
-
-	/**
-	 * Add Cdiscount fee value as WC item line
-	 *
-	 * @return void
-	 */
-	private function add_cdiscount_fees_order_item( $order, $cdiscount_fees ) {
-		if ( ! $order instanceof \WC_Order || ! $cdiscount_fees ) {
-			ShoppingFeedHelper::get_logger()->warning(
-				sprintf(
-				/* translators: %1$1s: WC_Order ID */
-					__( 'Cdiscount Fees for WC_Order %1$1s are empty, or order parameter is not of WC_Order type.', 'shopping-feed-cdiscount-fees' ),
-					$order->get_id()
-				),
-				array(
-					'source' => 'sshopping-feed-cdiscount-fees',
-				)
-			);
-
-			return;
-		}
-
-		$item_array = [
-			'order_item_name' => sprintf( __( 'Facilités de paiement Cdiscount : %s', 'shopping-feed-cdiscount-fees' ), $cdiscount_fees ),
-			'order_item_type' => 'line_item',
-		];
-
-		wc_add_order_item( $order->get_id(),  $item_array );
-	}
-
 }
