@@ -35,7 +35,7 @@ class Order {
 		}
 
 		// Define Cdiscount fees as meta
-		$wc_order->add_meta_data( self::SF_CDISCOUNT_FEE_META_KEY, $fees );
+		$wc_order->update_meta_data( self::SF_CDISCOUNT_FEE_META_KEY, $fees, true );
 
 		return true;
 	}

@@ -22,7 +22,7 @@ class Totals {
 	public function add_cdiscount_fees_meta_to_total( $wc_order ) {
 		$total = $wc_order->get_total();
 
-		$cdiscount_fees = (float) $wc_order->get_meta( Order::SF_CDISCOUNT_FEE_META_KEY );
+		$cdiscount_fees = (float) $wc_order->get_meta( Order::SF_CDISCOUNT_FEE_META_KEY, true );
 
 		if ( empty( $cdiscount_fees ) ) {
 			ShoppingFeedHelper::get_logger()->warning(
@@ -52,7 +52,7 @@ class Totals {
 	public function display_cdiscount_fees_as_total_line( $order_id ) {
 		// Get cdiscount fees meta
 		$wc_order            = wc_get_order( $order_id );
-		$cdiscount_fees_meta = $wc_order->get_meta( Order::SF_CDISCOUNT_FEE_META_KEY );
+		$cdiscount_fees_meta = $wc_order->get_meta( Order::SF_CDISCOUNT_FEE_META_KEY, true );
 
 		// Do not display anything if meta is empty
 		if ( empty( $cdiscount_fees_meta ) ) {
