@@ -30,7 +30,7 @@ class Order {
 	 */
 	public function save_cdiscount_fees_as_meta( $pre_save_fees, $wc_order, $sf_order, $fees ) {
 		// Make sure order comes from Shopping Feed and is from Cdiscount
-		if  ( ! SF_Order::is_sf_order( $wc_order ) || ! $this->is_cdiscount( $sf_order ) ) {
+		if  ( ! $this->is_cdiscount( $sf_order ) ) {
 			return $pre_save_fees;
 		}
 
@@ -39,13 +39,4 @@ class Order {
 
 		return true;
 	}
-
-    /**
-     * Get the order fees meta value
-     *
-     * @return mixed
-     */
-    public function get_cdiscount_fee_meta_value() {
-        return $this->sf_cdiscount_fee_meta_value;
-    }
 }
