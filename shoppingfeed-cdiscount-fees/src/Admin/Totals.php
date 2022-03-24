@@ -39,8 +39,6 @@ class Totals {
 			return;
 		}
 
-		$this->add_cdiscount_fees_order_item( $wc_order, $cdiscount_fees );
-
 		$wc_order->set_total( $total + $cdiscount_fees );
 
 		$wc_order->save();
