@@ -52,7 +52,7 @@ class Totals {
 		<tr>
 			<td class="label"><?php _e( 'Facilités de paiement Cdiscount', 'shopping-feed-cdiscount-fees' ); ?>:</td>
 			<td width="1%"></td>
-			<td class="total" style="font-weight: 700;">€<?php echo esc_html( $cdiscount_fees_meta ); ?></td>
+			<td class="total" style="font-weight: 700;"><?php echo wc_price( (float) $cdiscount_fees_meta ); ?></td>
 		</tr>
 		<?php
 	}
