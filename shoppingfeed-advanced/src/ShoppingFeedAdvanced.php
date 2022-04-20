@@ -80,11 +80,7 @@ class ShoppingFeedAdvanced {
 	 * Check if the plugin is compatible
 	 */
 	public function check_compatibility() {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		return is_plugin_active( 'shopping-feed/shoppingfeed.php' );
+		return defined( 'SF_VERSION' );
 	}
 
 	/**
